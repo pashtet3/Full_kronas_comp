@@ -13,7 +13,7 @@ TEXT_TAGS = {
     # звичайний текст
     "normal": {"foreground": "black"},
 
-    # для diff (mpr)
+    # для diff (biese)
     "added": {"foreground": "green"},
     "removed": {"foreground": "red"},
     "changed": {"foreground": "orange"},
