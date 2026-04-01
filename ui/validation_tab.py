@@ -2,8 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from core.validation import normalize_errors, compare_validation
 from core.io import load_json
-from utils.styles import apply_styles
-
+from utils.styles import apply_tree_styles, apply_text_styles
 
 def create_validation_tab(notebook):
 
@@ -27,7 +26,7 @@ def create_validation_tab(notebook):
     result_text = tk.Text(tab)
     result_text.pack(expand=True, fill="both")
 
-    apply_styles(result_text)
+    apply_text_styles(result_text)
 
     def choose_baseline():
         path = filedialog.askopenfilename(filetypes=[("JSON files", "*.json")])

@@ -2,8 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from core.calc import compare_calc
 from core.io import load_json
-from utils.styles import apply_styles
-
+from utils.styles import apply_tree_styles, apply_text_styles
 
 def create_calc_tab(notebook):
 
@@ -27,7 +26,7 @@ def create_calc_tab(notebook):
     calc_result_text = tk.Text(tab)
     calc_result_text.pack(expand=True, fill="both")
 
-    apply_styles(calc_result_text)
+    apply_text_styles(calc_result_text)
 
     def choose_calc_base():
         path = filedialog.askopenfilename(filetypes=[("JSON files", "*.json")])

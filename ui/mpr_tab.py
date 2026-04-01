@@ -3,7 +3,7 @@ import difflib
 import tkinter as tk
 from tkinter import ttk, filedialog, scrolledtext, messagebox
 from tkinter.font import Font
-
+from utils.styles import apply_tree_styles, apply_text_styles
 
 def create_mpr_tab(notebook):
     tab = tk.Frame(notebook)
@@ -86,7 +86,7 @@ class CIXComparerApp:
             columns=("file", "status", "changes"),
             show='headings'
         )
-
+        apply_tree_styles(self.tree)
         self.tree.heading("file", text="Файл")
         self.tree.heading("status", text="Статус")
         self.tree.heading("changes", text="Зміни")
@@ -94,9 +94,10 @@ class CIXComparerApp:
         self.tree.bind("<<TreeviewSelect>>", self.on_select)
 
         frame_bottom.add(self.tree)
-
+            
         self.preview = scrolledtext.ScrolledText(frame_bottom, font=self.diff_font)
         frame_bottom.add(self.preview)
+        apply_text_styles(self.preview)
 
     def create_folder_selector(self, parent, label, attr, row):
         tk.Label(parent, text=label).grid(row=row, column=0, sticky='w')
@@ -180,8 +181,6 @@ class CIXComparerApp:
                 tags=(tag,)
             )
 
-        self.tree.tag_configure("green", foreground="green")
-        self.tree.tag_configure("red", foreground="red")
 
     # ---------------- PREVIEW ---------------- #
 
