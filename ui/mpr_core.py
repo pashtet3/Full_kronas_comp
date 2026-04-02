@@ -101,7 +101,7 @@ class MPRComparerApp:
         frame_top.pack(fill='x', padx=10, pady=5)
 
         self.create_folder_selector(frame_top, "Архів Еталонних МПР:", "etalon", 0)
-        self.create_folder_selector(frame_top, "Архів Свіжих МПР:", "new", 1)
+        self.create_folder_selector(frame_top, "Архів Тестових МПР:", "new", 1)
 
         # Фільтри і пошук
         frame_filter = tk.Frame(root)

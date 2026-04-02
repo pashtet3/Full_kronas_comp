@@ -21,7 +21,9 @@ def create_calc_tab(notebook):
 
     tk.Button(tab, text="Обрати", command=lambda: choose_calc_current()).pack()
 
-    tk.Button(tab, text="Порівняти прорахунок", command=lambda: run()).pack(pady=5)
+    tk.Button(tab, text="Порівняти прорахунок",bg="lightblue", command=lambda: run()).pack(pady=5)
+
+
 
     calc_result_text = tk.Text(tab)
     calc_result_text.pack(expand=True, fill="both")

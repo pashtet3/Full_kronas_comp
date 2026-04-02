@@ -21,7 +21,7 @@ def create_validation_tab(notebook):
 
     tk.Button(tab, text="Обрати", command=lambda: choose_current()).pack()
 
-    tk.Button(tab, text="Порівняти", command=lambda: compare()).pack(pady=5)
+    tk.Button(tab, text="Порівняти",bg="lightblue", command=lambda: compare()).pack(pady=5)
 
     result_text = tk.Text(tab)
     result_text.pack(expand=True, fill="both")

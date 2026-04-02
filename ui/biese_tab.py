@@ -52,66 +52,94 @@ class CIXComparerApp:
     # ---------------- UI ---------------- #
 
     def build_ui(self):
+        # --- TOP: папки ---
         frame_top = tk.Frame(self.root)
         frame_top.pack(fill='x', padx=10, pady=5)
 
-        self.create_folder_selector(frame_top, "Папка 1:", "folder1", 0)
-        self.create_folder_selector(frame_top, "Папка 2:", "folder2", 1)
+        self.create_folder_selector(frame_top, "Папка Еталонних .cix:", "folder1", 0)
+        self.create_folder_selector(frame_top, "Папка тестових .cix:", "folder2", 1)
 
-        # 🔥 ЧЕКБОКС (повернули)
+        # --- FILTER BAR (як у mpr) ---
+        frame_filter = tk.Frame(self.root)
+        frame_filter.pack(fill='x', padx=10, pady=5)
+
         self.var_only_diff = tk.BooleanVar(value=False)
 
         cb = tk.Checkbutton(
-            frame_top,
+            frame_filter,
             text="Показувати лише різні файли",
             variable=self.var_only_diff,
             command=self.apply_filters
         )
-        cb.grid(row=2, column=0, sticky="w")
+        cb.pack(side='left')
 
         tk.Button(
-            frame_top,
+            frame_filter,
             text="Порівняти",
             command=self.on_compare,
             bg="lightblue",
-            width=15,
+            width=12,
             height=2
-        ).grid(row=2, column=1, columnspan=2, pady=10)
+        ).pack(side='right', padx=10, pady=5)
 
-        frame_bottom = tk.PanedWindow(self.root, sashrelief='sunken', sashwidth=8)
+        # --- BOTTOM ---
+        frame_bottom = tk.PanedWindow(
+            self.root,
+            sashrelief='sunken',
+            sashwidth=8,
+            orient=tk.HORIZONTAL
+        )
         frame_bottom.pack(fill='both', expand=True, padx=10, pady=10)
 
+        # --- TREE ---
         self.tree = ttk.Treeview(
             frame_bottom,
             columns=("file", "status", "changes"),
-            show='headings'
+            show='headings',
+            height=20
         )
+
         apply_tree_styles(self.tree)
+
         self.tree.heading("file", text="Файл")
         self.tree.heading("status", text="Статус")
         self.tree.heading("changes", text="Зміни")
 
+        self.tree.column("file", width=250, anchor='w')
+        self.tree.column("status", width=150, anchor='center')
+        self.tree.column("changes", width=100, anchor='center')
+
         self.tree.bind("<<TreeviewSelect>>", self.on_select)
 
         frame_bottom.add(self.tree)
-            
-        self.preview = scrolledtext.ScrolledText(frame_bottom, font=self.diff_font)
+
+        # --- PREVIEW ---
+        self.preview = scrolledtext.ScrolledText(
+            frame_bottom,
+            width=80,
+            font=self.diff_font
+        )
         frame_bottom.add(self.preview)
+
         apply_text_styles(self.preview)
 
     def create_folder_selector(self, parent, label, attr, row):
-        tk.Label(parent, text=label).grid(row=row, column=0, sticky='w')
+        tk.Label(parent, text=label).grid(row=row, column=0, sticky='w', padx=(0,5), pady=3)
 
         entry = tk.Entry(parent, width=70)
-        entry.grid(row=row, column=1, padx=5)
+        entry.grid(row=row, column=1, sticky='we', pady=3)
 
         setattr(self, attr + "_entry", entry)
 
         tk.Button(
             parent,
             text="Обрати",
-            command=lambda: self.select_folder(entry)
-        ).grid(row=row, column=2)
+            command=lambda: self.select_folder(entry),
+            width=12,
+            height=2
+        ).grid(row=row, column=2, padx=10, pady=5)
+
+        parent.grid_columnconfigure(1, weight=1)
 
     def select_folder(self, entry):
         path = filedialog.askdirectory()
@@ -171,7 +199,12 @@ class CIXComparerApp:
             if only_diff and status == "Ідентичний":
                 continue
 
-            tag = "green" if status == "Ідентичний" else "red"
+            if status == "Ідентичний":
+                tag = "green"
+            elif status == "Змінений":
+                tag = "red"
+            else:
+                tag = "orange"   # для відсутніх файлів
 
             self.tree.insert(
                 "",
@@ -204,4 +237,16 @@ class CIXComparerApp:
             return
 
         for line in diff:
-            self.preview.insert(tk.END, line + "\n")
+            tag = None
+
+            if line.startswith('+') and not line.startswith('+++'):
+                tag = "added"
+            elif line.startswith('-') and not line.startswith('---'):
+                tag = "removed"
+            elif line.startswith('?'):
+                tag = "changed"
+
+            if tag:
+                self.preview.insert(tk.END, line + "\n", tag)
+            else:
+                self.preview.insert(tk.END, line + "\n")
