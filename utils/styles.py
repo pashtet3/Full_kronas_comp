@@ -1,3 +1,5 @@
+
+
 TREE_TAGS = {
     "green": {"foreground": "green"},
     "red": {"foreground": "red"},
@@ -6,9 +8,9 @@ TREE_TAGS = {
 
 TEXT_TAGS = {
     # заголовки (жирні кольорові)
-    "added_title": {"foreground": "green", "font": ("Arial", 10, "bold")},
-    "removed_title": {"foreground": "red", "font": ("Arial", 10, "bold")},
-    "changed_title": {"foreground": "orange", "font": ("Arial", 10, "bold")},
+    "added_title": {"foreground": "green", "font": ("Arial", 12, "bold")},
+    "removed_title": {"foreground": "red", "font": ("Arial", 12, "bold")},
+    "changed_title": {"foreground": "orange", "font": ("Arial", 12, "bold")},
 
     # звичайний текст
     "normal": {"foreground": "black"},
@@ -29,47 +31,6 @@ def apply_text_styles(text_widget):
     for tag, cfg in TEXT_TAGS.items():
         text_widget.tag_config(tag, **cfg)
 
-def apply_dark_theme(root):
-    style = ttk.Style(root)
-
-    root.configure(bg="#2b2b2b")
-
-    style.theme_use("default")
-
-    style.configure(
-        "TFrame",
-        background="#2b2b2b"
-    )
-
-    style.configure(
-        "TLabel",
-        background="#2b2b2b",
-        foreground="#ffffff"
-    )
-
-    style.configure(
-        "TButton",
-        background="#3c3f41",
-        foreground="#ffffff"
-    )
-
-    style.configure(
-        "TCheckbutton",
-        background="#2b2b2b",
-        foreground="#ffffff"
-    )
-
-    style.configure(
-        "Treeview",
-        background="#2b2b2b",
-        foreground="#ffffff",
-        fieldbackground="#2b2b2b"
-    )
-
-    style.map(
-        "Treeview",
-        background=[("selected", "#555555")]
-    )
 
 
 def apply_light_theme(root):
