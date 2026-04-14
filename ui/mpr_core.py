@@ -165,7 +165,7 @@ class MPRComparerApp:
         setattr(self, f"{attr_name}_entry", entry)
 
 
-        btn = tk.Button(parent, text="Огляд", command=lambda: self.select_folder(entry), width=12, height=2)
+        btn = tk.Button(parent, text="Обрати", command=lambda: self.select_folder(entry), width=12, height=2)
         btn.grid(row=row, column=2, padx=10, pady=5)
 
         entry.config(font=("Consolas", 9))

@@ -7,7 +7,7 @@ from utils.styles import apply_tree_styles, apply_text_styles
 
 def create_biese_tab(notebook):
     tab = tk.Frame(notebook)
-    notebook.add(tab, text="Порівняння BieSe")
+    notebook.add(tab, text="Порівняння .CIX")
     CIXComparerApp(tab)
 
 
@@ -57,7 +57,7 @@ class CIXComparerApp:
         frame_top.pack(fill='x', padx=10, pady=5)
 
         self.create_folder_selector(frame_top, "Папка Еталонних .cix:", "folder1", 0)
-        self.create_folder_selector(frame_top, "Папка тестових .cix:", "folder2", 1)
+        self.create_folder_selector(frame_top, "Папка Тестових .cix:", "folder2", 1)
 
         # --- FILTER BAR (як у mpr) ---
         frame_filter = tk.Frame(self.root)
