@@ -11,14 +11,14 @@ def create_calc_tab(notebook):
     tab = tk.Frame(notebook)
     notebook.add(tab, text="Прорахунок")
 
-    tk.Label(tab, text="Еталонний json прорахунку:").pack()
+    tk.Label(tab, text="Еталонний /nomenclature прорахунку:").pack()
     calc_base_entry = tk.Entry(tab, width=100)
     calc_base_entry.pack()
 
     tk.Button(tab, text="Обрати", command=lambda: choose_calc_base()).pack()
     tk.Button(tab, text="📋 Вставити з буфера(еталон)", command=lambda: paste_baseline()).pack()
 
-    tk.Label(tab, text="Json проєкту що тестується:").pack()
+    tk.Label(tab, text="/nomenclature проєкту що тестується:").pack()
     calc_current_entry = tk.Entry(tab, width=100)
     calc_current_entry.pack()
 

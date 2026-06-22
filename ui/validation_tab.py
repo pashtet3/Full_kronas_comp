@@ -11,18 +11,18 @@ def create_validation_tab(notebook):
     tab = tk.Frame(notebook)
     notebook.add(tab, text="Валідація")
 
-    tk.Label(tab, text="Еталонний json валідації:").pack()
+    tk.Label(tab, text="Еталонний /vs:").pack()
     baseline_entry = tk.Entry(tab, width=100)
     baseline_entry.pack()
 
     tk.Button(tab, text="Обрати", command=lambda: choose_baseline()).pack()
-    tk.Button(tab, text="📋 Вставити (еталон)", command=lambda: paste_baseline()).pack()
-    tk.Label(tab, text="Json проєкту що тестується:").pack()
+    tk.Button(tab, text="📋 Вставити (еталон) з буфера", command=lambda: paste_baseline()).pack()
+    tk.Label(tab, text="/vs проєкту що тестується:").pack()
     current_entry = tk.Entry(tab, width=100)
     current_entry.pack()
 
     tk.Button(tab, text="Обрати", command=lambda: choose_current()).pack()
-    tk.Button(tab, text="📋 Вставити (тест)", command=lambda: paste_current()).pack()
+    tk.Button(tab, text="📋 Вставити (тест) з буфера", command=lambda: paste_current()).pack()
     tk.Button(tab, text="Порівняти Валідації",bg="lightblue", command=lambda: compare()).pack(pady=5)
 
     result_text = tk.Text(tab)

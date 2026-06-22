@@ -21,12 +21,12 @@ def create_help_tab(notebook):
     text.insert("end", "    1. Валідація:\n", "bold")
     text.insert("end", "- Необхідно створити ", "small")
     text.insert("end", ".json", "red")
-    text.insert("end", " файли та зберегти в них еталонний та тестовий Previev на запит /vs, обрати дані json та виконати порівняння\n\n", "small")
+    text.insert("end", " файли та зберегти в них еталонний та тестовий Previev на запит /vs, обрати дані json. Або скопіювати Previev на запит /vs та натиснути кнопку ''Вставити з буфера. Виконати порівняння натиснувши відповідну кнопку'' \n\n", "small")
 
     text.insert("end", "    2. Прорахунок:\n", "bold")
     text.insert("end", "- Необхідно створити ", "small")
     text.insert("end", ".json", "red")
-    text.insert("end", " файли та зберегти в них еталонний та тестовий Previev на запит /nomenclature3d, обрати дані json та виконати порівняння\n\n", "small")
+    text.insert("end", " файли та зберегти в них еталонний та тестовий Previev на запит /nomenclature3d, обрати дані json. Або скопіювати Previev на запит /nomenclature3d та натиснути кнопку ''Вставити з буфера. Виконати порівняння натиснувши відповідну кнопку\n\n", "small")
 
     text.insert("end", "    3. Порівняння .CIX:\n", "bold")
     text.insert("end", "- Для виконання порівняння .cix програм необхідно попередньо викачати архіви програм (вкладка autoCVRT), ", "small")
